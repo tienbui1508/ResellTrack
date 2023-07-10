@@ -7,18 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C11EFE32A436D7800607627 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C11EFE22A436D7800607627 /* AddItemView.swift */; };
 		7C6074F12A3A0F68005A7AD9 /* ResellTrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6074F02A3A0F68005A7AD9 /* ResellTrackApp.swift */; };
 		7C6074F32A3A0F68005A7AD9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6074F22A3A0F68005A7AD9 /* ContentView.swift */; };
 		7C6074F52A3A0F69005A7AD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C6074F42A3A0F69005A7AD9 /* Assets.xcassets */; };
 		7C6074F82A3A0F69005A7AD9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C6074F72A3A0F69005A7AD9 /* Preview Assets.xcassets */; };
+		7C66EA842A5C3BA900B9869B /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66EA832A5C3BA900B9869B /* Item.swift */; };
+		7C66EA862A5C3CEB00B9869B /* FileManager-DocumentDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66EA852A5C3CEB00B9869B /* FileManager-DocumentDirectory.swift */; };
+		7C66EA882A5C3E0C00B9869B /* ItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66EA872A5C3E0C00B9869B /* ItemsView.swift */; };
+		7C66EA8A2A5C4A2300B9869B /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66EA892A5C4A2300B9869B /* DetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C11EFE22A436D7800607627 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		7C6074ED2A3A0F68005A7AD9 /* ResellTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ResellTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C6074F02A3A0F68005A7AD9 /* ResellTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResellTrackApp.swift; sourceTree = "<group>"; };
 		7C6074F22A3A0F68005A7AD9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7C6074F42A3A0F69005A7AD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C6074F72A3A0F69005A7AD9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7C66EA832A5C3BA900B9869B /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		7C66EA852A5C3CEB00B9869B /* FileManager-DocumentDirectory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentDirectory.swift"; sourceTree = "<group>"; };
+		7C66EA872A5C3E0C00B9869B /* ItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsView.swift; sourceTree = "<group>"; };
+		7C66EA892A5C4A2300B9869B /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +63,11 @@
 			children = (
 				7C6074F02A3A0F68005A7AD9 /* ResellTrackApp.swift */,
 				7C6074F22A3A0F68005A7AD9 /* ContentView.swift */,
+				7C66EA872A5C3E0C00B9869B /* ItemsView.swift */,
+				7C66EA892A5C4A2300B9869B /* DetailsView.swift */,
+				7C11EFE22A436D7800607627 /* AddItemView.swift */,
+				7C66EA832A5C3BA900B9869B /* Item.swift */,
+				7C66EA852A5C3CEB00B9869B /* FileManager-DocumentDirectory.swift */,
 				7C6074F42A3A0F69005A7AD9 /* Assets.xcassets */,
 				7C6074F62A3A0F69005A7AD9 /* Preview Content */,
 			);
@@ -137,8 +152,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C66EA842A5C3BA900B9869B /* Item.swift in Sources */,
+				7C66EA8A2A5C4A2300B9869B /* DetailsView.swift in Sources */,
+				7C66EA882A5C3E0C00B9869B /* ItemsView.swift in Sources */,
 				7C6074F32A3A0F68005A7AD9 /* ContentView.swift in Sources */,
+				7C66EA862A5C3CEB00B9869B /* FileManager-DocumentDirectory.swift in Sources */,
 				7C6074F12A3A0F68005A7AD9 /* ResellTrackApp.swift in Sources */,
+				7C11EFE32A436D7800607627 /* AddItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
