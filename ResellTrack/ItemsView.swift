@@ -12,16 +12,20 @@ struct ItemsView: View {
         case none, resold, available
     }
     
-    enum SortType {
+    enum SortType: String, CaseIterable {
         case `default`, name, date
     }
     
     @EnvironmentObject var data: Items
-    @State private var isShowingAddScreen = false
     
-    @State private var sortOrder = SortType.default
+    @AppStorage("sortType") var sortOrder = SortType.default
+    
+    @State private var isShowingAddScreen = false
     @State private var isShowingSortOptions = false
+    @State private var isShowingResellItemScreen = false
+    
     @State private var searchText = ""
+    @State private var reSoldItem: Item = Item()
     
     let filter: FilterType
     
@@ -43,7 +47,7 @@ struct ItemsView: View {
                             if item.isResold && filter == .none {
                                 Spacer()
                                 Image(systemName: "dollarsign.arrow.circlepath")
-                                    .foregroundColor(.green)
+                                    .foregroundColor(item.resellGain >= 0 ? .green : .red)
                             }
                             
                             if item.isResold && filter == .resold {
@@ -55,14 +59,16 @@ struct ItemsView: View {
                         .swipeActions {
                             if item.isResold {
                                 Button {
-                                    data.toggle(item)
+                                    data.toggleAvailibility(item)
                                 } label: {
                                     Label("Mark Resold", systemImage: "checkmark.circle")
                                 }
                                 .tint(.blue)
                             } else {
                                 Button {
-                                    data.toggle(item)
+                                    data.toggleAvailibility(item)
+                                    reSoldItem = item
+                                    isShowingResellItemScreen = true
                                 } label: {
                                     Label("Mark Available", systemImage: "dollarsign.arrow.circlepath")
                                 }
@@ -101,10 +107,26 @@ struct ItemsView: View {
             .sheet(isPresented: $isShowingAddScreen) {
                 AddItemView()
             }
+            .sheet(isPresented: $isShowingResellItemScreen) {
+                ResellItemView(item: reSoldItem)
+            }
             .confirmationDialog("Sort by…", isPresented: $isShowingSortOptions) {
-                Button("Default") { sortOrder = .default }
-                Button("Name (A-Z)") { sortOrder = .name }
-                Button("Date bought (Newest first)") { sortOrder = .date }
+                Button {
+                    sortOrder = .default
+                } label: {
+                    Label("Default", systemImage: "circle")
+                }
+                Button {
+                    sortOrder = .name
+                } label: {
+                    Label("Name (A-Z)", systemImage: "circle")
+                }
+                Button {
+                    sortOrder = .date
+                } label: {
+                    Label("Date bought (Newest first)", systemImage: "circle")
+                }
+
             }
             .searchable(text: $searchText, prompt: "Search for an item")
         }

@@ -9,28 +9,28 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var data = Items()
-    
+
     var body: some View {
         TabView {
             ItemsView(filter: .available)
                 .tabItem {
-                    Label("Available", systemImage: "checkmark.circle")
-                }
-            
+                Label("Available", systemImage: "checkmark.circle")
+            }
+
             ItemsView(filter: .resold)
                 .tabItem {
-                    Label("Resold", systemImage: "dollarsign.arrow.circlepath")
-                }
-            
+                Label("Resold", systemImage: "dollarsign.arrow.circlepath")
+            }
+
             ItemsView(filter: .none)
                 .tabItem {
-                    Label("All", systemImage: "eye")
-                }
-        
+                Label("All", systemImage: "eye")
+            }
+
         }
-        .environmentObject(data)
+            .environmentObject(data)
     }
-    
+
 }
 
 struct ContentView_Previews: PreviewProvider {

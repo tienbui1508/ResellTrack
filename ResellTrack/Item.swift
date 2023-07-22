@@ -61,7 +61,15 @@ class Item: Identifiable, Codable {
         save()
     }
     
-    func toggle(_ item: Item) {
+    func resellItem(_ item: Item, resoldPrice: Double, resoldDate: Date) {
+        let resoldItemIdex = items.firstIndex { $0.id == item.id }
+        guard items.isEmpty == false else { return }
+        items[resoldItemIdex!].reSoldPrice = resoldPrice
+        items[resoldItemIdex!].reSoldDate = resoldDate
+        save()
+    }
+    
+    func toggleAvailibility(_ item: Item) {
         objectWillChange.send()
         item.isResold.toggle()
         save()
