@@ -10,7 +10,11 @@ import SwiftUI
 struct DetailsView: View {
     var item: Item
     var body: some View {
-        Text(item.name)
+        VStack {
+            Text(item.name)
+            Text("\(String(format: "%.0f", item.boughtPrice))")
+                
+        }
     }
 }
 

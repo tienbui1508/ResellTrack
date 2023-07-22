@@ -15,6 +15,10 @@ class Item: Identifiable, Codable {
     var boughtDate = Date.now
     var reSoldDate = Date.now
     var description = "Description..."
+    var resellGain: Double {
+        reSoldPrice - boughtPrice
+    }
+    
     fileprivate(set) var isResold = false
     
     static let exampleItem = Item()
@@ -49,6 +53,11 @@ class Item: Identifiable, Codable {
         newItem.name = name
         newItem.boughtPrice = boughtPrice
         items.append(newItem)
+        save()
+    }
+    
+    func deleteItem(_ item: Item) {
+        items.removeAll { $0.id == item.id }
         save()
     }
     

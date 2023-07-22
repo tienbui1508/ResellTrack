@@ -13,16 +13,18 @@ struct ItemsView: View {
     }
     
     enum SortType {
-        case name, date
+        case `default`, name, date
     }
     
     @EnvironmentObject var data: Items
     @State private var isShowingAddScreen = false
     
-    @State private var sortOrder = SortType.date
+    @State private var sortOrder = SortType.default
     @State private var isShowingSortOptions = false
+    @State private var searchText = ""
     
     let filter: FilterType
+    
     var body: some View {
         NavigationView {
             List {
@@ -34,12 +36,20 @@ struct ItemsView: View {
                             VStack(alignment: .leading) {
                                 Text(item.name)
                                     .font(.headline)
+                                Text("$\(String(format: "%.0f", item.boughtPrice))")
+                                    .font(.caption)
                             }
                             
                             if item.isResold && filter == .none {
                                 Spacer()
-                                Image(systemName: "circle.fill.badge.checkmark")
+                                Image(systemName: "dollarsign.arrow.circlepath")
                                     .foregroundColor(.green)
+                            }
+                            
+                            if item.isResold && filter == .resold {
+                                Spacer()
+                                Text("$\(String(format: "%.0f", item.resellGain))")
+                                    .foregroundColor(item.resellGain >= 0 ? .green : .red)
                             }
                         }
                         .swipeActions {
@@ -47,22 +57,26 @@ struct ItemsView: View {
                                 Button {
                                     data.toggle(item)
                                 } label: {
-                                    Label("Mark Resold", systemImage: "person.crop.circle.badge.xmark")
+                                    Label("Mark Resold", systemImage: "checkmark.circle")
                                 }
                                 .tint(.blue)
                             } else {
                                 Button {
                                     data.toggle(item)
                                 } label: {
-                                    Label("Mark Available", systemImage: "person.crop.circle.fill.badge.checkmark")
+                                    Label("Mark Available", systemImage: "dollarsign.arrow.circlepath")
                                 }
                                 .tint(.green)
-                                
-                              
+                            }
+                            
+                            Button(role: .destructive)  {
+                                data.deleteItem(item)
+                            } label: {
+                                Label("Delete item", systemImage: "trash")
                             }
                         }
                     }
-
+                    
                     
                 }
             }
@@ -75,7 +89,7 @@ struct ItemsView: View {
                         Label("Sort", systemImage: "arrow.up.arrow.down")
                     }
                 }
-
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         isShowingAddScreen = true
@@ -88,9 +102,11 @@ struct ItemsView: View {
                 AddItemView()
             }
             .confirmationDialog("Sort by…", isPresented: $isShowingSortOptions) {
+                Button("Default") { sortOrder = .default }
                 Button("Name (A-Z)") { sortOrder = .name }
-                Button("Date (Newest first)") { sortOrder = .date }
+                Button("Date bought (Newest first)") { sortOrder = .date }
             }
+            .searchable(text: $searchText, prompt: "Search for an item")
         }
     }
     
@@ -107,7 +123,6 @@ struct ItemsView: View {
     
     var filteredItems: [Item] {
         let result: [Item]
-
         switch filter {
         case .none:
             result = data.items
@@ -116,12 +131,22 @@ struct ItemsView: View {
         case .available:
             result = data.items.filter { !$0.isResold }
         }
-
-        if sortOrder == .name {
-            return result.sorted { $0.name < $1.name }
+        
+        if searchText.isEmpty {
+            return result
         } else {
-            //TODO: change to actual added date or date sold
-            return result.reversed()
+            return result.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+        }
+    }
+    
+    var sortedItems: [Item] {
+        switch sortOrder {
+        case .name:
+            return filteredItems.sorted { $0.name < $1.name }
+        case .date:
+            return filteredItems.sorted { $0.boughtDate > $1.boughtDate }
+        default:
+            return filteredItems.reversed()
         }
     }
 }

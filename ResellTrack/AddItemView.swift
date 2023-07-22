@@ -12,33 +12,66 @@ struct AddItemView: View {
     @Environment(\.dismiss) var dismiss
     
     @State private var name = ""
+    @State private var description = ""
     @State private var boughtDate = Date.now
-    @State private var boughtPrice: Double = 0
+    @State private var boughtPrice: Double?
+    
+    @FocusState private var inputIsFocused: Bool
     
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    TextField("Item name", text: $name)
-                    TextField("Bought price", value: $boughtPrice, format: .number)
+                    TextField("Item name *", text: $name)
+                        .focused($inputIsFocused)
+                    
+                    TextField("Bought price *", value: $boughtPrice, format: .currency(code: "AUD"))
+                        .keyboardType(.decimalPad)
+                        .focused($inputIsFocused)
+                    
+                    ZStack(alignment: .leading) {
+                        if description.isEmpty {
+                            Text("Description")
+                                .opacity(0.25)
+                        }
+                        
+                        TextEditor(text: $description)
+                            .focused($inputIsFocused)
+                    }
+                    
                     DatePicker("Bought date", selection: $boughtDate, displayedComponents: .date)
                 }
                 
                 Section {
                     Button("Save") {
-                        data.addItem(name: name, boughtPrice: boughtPrice, boughtDate: boughtDate)
+                        data.addItem(name: name, boughtPrice: boughtPrice ?? 0, boughtDate: boughtDate)
                         dismiss()
                     }
-                    //TODO: validate input
+                    .disabled(name.isEmpty || boughtPrice == nil)
+                    
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                    .foregroundColor(.red)
                 }
+                
             }
             .navigationTitle("Add Item")
+            
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Done") {
+                        inputIsFocused = false
+                    }
+                }
+            }
         }
     }
 }
 
-    struct AddItemView_Previews: PreviewProvider {
-        static var previews: some View {
-            AddItemView()
-        }
+struct AddItemView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddItemView()
     }
+}
