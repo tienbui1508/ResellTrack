@@ -32,7 +32,7 @@ struct ResellItemView: View {
                 
                 Section {
                     Button("Save") {
-                        data.resellItem(item, resoldPrice: reSoldPrice ?? 0, resoldDate: reSoldDate)
+                        data.resell(item, for: reSoldPrice ?? 0, on: reSoldDate)
                         dismiss()
                     }
                     .disabled(reSoldPrice == nil)

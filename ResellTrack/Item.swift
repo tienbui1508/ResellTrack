@@ -47,31 +47,34 @@ class Item: Identifiable, Codable {
         }
     }
     
-    func addItem(name: String, boughtPrice: Double, boughtDate: Date = Date.now) {
+    func addItem(name: String, boughtPrice: Double, boughtDate: Date) {
         let newItem = Item()
         newItem.id = UUID()
         newItem.name = name
         newItem.boughtPrice = boughtPrice
+        newItem.boughtDate = boughtDate
         items.append(newItem)
         save()
     }
     
-    func deleteItem(_ item: Item) {
+    func delete(_ item: Item) {
         items.removeAll { $0.id == item.id }
         save()
     }
     
-    func resellItem(_ item: Item, resoldPrice: Double, resoldDate: Date) {
-        let resoldItemIdex = items.firstIndex { $0.id == item.id }
-        guard items.isEmpty == false else { return }
-        items[resoldItemIdex!].reSoldPrice = resoldPrice
-        items[resoldItemIdex!].reSoldDate = resoldDate
+    func resell(_ item: Item, for resoldPrice: Double, on resoldDate: Date) {
+        objectWillChange.send()
+        item.isResold = true
+        item.reSoldPrice = resoldPrice
+        item.reSoldDate = resoldDate
         save()
     }
     
-    func toggleAvailibility(_ item: Item) {
+    func undoResell(_ item: Item) {
         objectWillChange.send()
-        item.isResold.toggle()
+        item.isResold = false
+        item.reSoldPrice = 0
         save()
     }
+    
 }

@@ -32,7 +32,7 @@ struct ItemsView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(filteredItems) { item in
+                ForEach(sortedItems) { item in
                     NavigationLink {
                         DetailsView(item: item)
                     } label: {
@@ -59,14 +59,13 @@ struct ItemsView: View {
                         .swipeActions {
                             if item.isResold {
                                 Button {
-                                    data.toggleAvailibility(item)
+                                    data.undoResell(item)
                                 } label: {
                                     Label("Mark Resold", systemImage: "checkmark.circle")
                                 }
                                 .tint(.blue)
                             } else {
                                 Button {
-                                    data.toggleAvailibility(item)
                                     reSoldItem = item
                                     isShowingResellItemScreen = true
                                 } label: {
@@ -76,7 +75,7 @@ struct ItemsView: View {
                             }
                             
                             Button(role: .destructive)  {
-                                data.deleteItem(item)
+                                data.delete(item)
                             } label: {
                                 Label("Delete item", systemImage: "trash")
                             }
@@ -93,6 +92,12 @@ struct ItemsView: View {
                         isShowingSortOptions = true
                     } label: {
                         Label("Sort", systemImage: "arrow.up.arrow.down")
+                        if sortOrder == .name {
+                            Label("sort by name", systemImage: "abc")
+                        } else if sortOrder == .date {
+                            Label("sort by name", systemImage: "calendar")
+                        }
+                        
                     }
                 }
                 
@@ -111,22 +116,9 @@ struct ItemsView: View {
                 ResellItemView(item: reSoldItem)
             }
             .confirmationDialog("Sort by…", isPresented: $isShowingSortOptions) {
-                Button {
-                    sortOrder = .default
-                } label: {
-                    Label("Default", systemImage: "circle")
-                }
-                Button {
-                    sortOrder = .name
-                } label: {
-                    Label("Name (A-Z)", systemImage: "circle")
-                }
-                Button {
-                    sortOrder = .date
-                } label: {
-                    Label("Date bought (Newest first)", systemImage: "circle")
-                }
-
+                Button("Default (Date added)") { sortOrder = .default }
+                Button("Name (A-Z)") { sortOrder = .name }
+                Button("Date bought (Newest first)") { sortOrder = .date }
             }
             .searchable(text: $searchText, prompt: "Search for an item")
         }

@@ -13,6 +13,7 @@ struct DetailsView: View {
         VStack {
             Text(item.name)
             Text("\(String(format: "%.0f", item.boughtPrice))")
+            Text("\(item.boughtDate)")
                 
         }
     }
