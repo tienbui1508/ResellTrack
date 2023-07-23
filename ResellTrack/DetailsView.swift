@@ -11,6 +11,7 @@ struct DetailsView: View {
     var item: Item
     var body: some View {
         VStack {
+            // TODO: add details view
             Text(item.name)
             Text("\(String(format: "%.0f", item.boughtPrice))")
             Text("\(item.boughtDate)")

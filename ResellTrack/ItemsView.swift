@@ -61,7 +61,7 @@ struct ItemsView: View {
                                 Button {
                                     data.undoResell(item)
                                 } label: {
-                                    Label("Mark Resold", systemImage: "checkmark.circle")
+                                    Label("Mark Resold", systemImage: "arrow.uturn.backward.circle")
                                 }
                                 .tint(.blue)
                             } else {
