@@ -28,7 +28,7 @@ struct ContentView: View {
             }
 
         }
-            .environmentObject(data)
+        .environmentObject(data)
     }
 
 }

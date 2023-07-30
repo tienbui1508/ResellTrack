@@ -10,16 +10,16 @@ import SwiftUI
 class Item: Identifiable, Codable {
     var id = UUID()
     var name = "Anonymous Item"
-    var boughtPrice = 0.0
-    var reSoldPrice = 0.0
-    var boughtDate = Date.now
-    var reSoldDate = Date.now
+    var purchasePrice = 0.0
+    var resellPrice = 0.0
+    var purchaseDate = Date.now
+    var resellDate = Date.now
     var description = "Description..."
     var resellGain: Double {
-        reSoldPrice - boughtPrice
+        resellPrice - purchasePrice
     }
     
-    fileprivate(set) var isResold = false
+    var isResold = false
     
     static let exampleItem = Item()
 }
@@ -47,12 +47,12 @@ class Item: Identifiable, Codable {
         }
     }
     
-    func addItem(name: String, boughtPrice: Double, boughtDate: Date) {
+    func addItem(name: String, purchasePrice: Double, purchaseDate: Date) {
         let newItem = Item()
         newItem.id = UUID()
         newItem.name = name
-        newItem.boughtPrice = boughtPrice
-        newItem.boughtDate = boughtDate
+        newItem.purchasePrice = purchasePrice
+        newItem.purchaseDate = purchaseDate
         items.append(newItem)
         save()
     }
@@ -62,18 +62,26 @@ class Item: Identifiable, Codable {
         save()
     }
     
-    func resell(_ item: Item, for resoldPrice: Double, on resoldDate: Date) {
+    func resell(_ item: Item, for resellPrice: Double, on resellDate: Date) {
         objectWillChange.send()
+        
         item.isResold = true
-        item.reSoldPrice = resoldPrice
-        item.reSoldDate = resoldDate
+        item.resellPrice = resellPrice
+        item.resellDate = resellDate
         save()
+//        if let item = items.first(where: { $0.id == item.id }) {
+//            item.isResold = true
+//            item.resellPrice = resellPrice
+//            item.resellDate = resellDate
+//            save()
+//        }
+       
     }
     
     func undoResell(_ item: Item) {
         objectWillChange.send()
         item.isResold = false
-        item.reSoldPrice = 0
+        item.resellPrice = 0
         save()
     }
     

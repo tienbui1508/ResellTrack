@@ -40,7 +40,7 @@ struct ItemsView: View {
                             VStack(alignment: .leading) {
                                 Text(item.name)
                                     .font(.headline)
-                                Text("$\(String(format: "%.0f", item.boughtPrice))")
+                                Text("$\(String(format: "%.0f", item.purchasePrice))")
                                     .font(.caption)
                             }
                             
@@ -87,7 +87,7 @@ struct ItemsView: View {
             }
             .navigationTitle(title)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem {
                     Button {
                         isShowingSortOptions = true
                     } label: {
@@ -99,14 +99,21 @@ struct ItemsView: View {
                         }
                         
                     }
+                    .buttonStyle(.borderedProminent)
+                    .buttonBorderShape(.capsule)
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem {
                     Button {
                         isShowingAddScreen = true
                     } label: {
-                        Label("Add Item", systemImage: "plus")
+                        HStack {
+                            Image(systemName: "plus")
+                            Text("New item")
+                        }
                     }
+                    .buttonStyle(.borderedProminent)
+                    .buttonBorderShape(.capsule)
                 }
             }
             .sheet(isPresented: $isShowingAddScreen) {
@@ -120,7 +127,7 @@ struct ItemsView: View {
                 Button("Name (A-Z)") { sortOrder = .name }
                 Button("Date bought (Newest first)") { sortOrder = .date }
             }
-            .searchable(text: $searchText, prompt: "Search for an item")
+            .searchable(text: $searchText, prompt: "Find items")
         }
     }
     
@@ -158,7 +165,7 @@ struct ItemsView: View {
         case .name:
             return filteredItems.sorted { $0.name < $1.name }
         case .date:
-            return filteredItems.sorted { $0.boughtDate > $1.boughtDate }
+            return filteredItems.sorted { $0.purchaseDate > $1.purchaseDate }
         default:
             return filteredItems.reversed()
         }

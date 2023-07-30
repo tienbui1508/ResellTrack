@@ -27,7 +27,7 @@ struct ResellItemView: View {
                         .keyboardType(.decimalPad)
                         .focused($inputIsFocused)
                     
-                    DatePicker("Resold date", selection: $item.reSoldDate, displayedComponents: .date)
+                    DatePicker("Resold date", selection: $item.resellDate, displayedComponents: .date)
                 }
                 
                 Section {

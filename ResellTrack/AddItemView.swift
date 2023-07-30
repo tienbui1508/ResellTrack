@@ -23,9 +23,9 @@ struct AddItemView: View {
             Form {
                 Section {
                     TextField("Item name *", text: $name)
-                        .focused($inputIsFocused)
+//                        .focused($inputIsFocused)
                     
-                    TextField("Bought price *", value: $boughtPrice, format: .currency(code: "AUD"))
+                    TextField("Bought price *", value: $boughtPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                         .keyboardType(.decimalPad)
                         .focused($inputIsFocused)
                     
@@ -36,7 +36,7 @@ struct AddItemView: View {
                         }
                         
                         TextEditor(text: $description)
-                            .focused($inputIsFocused)
+//                            .focused($inputIsFocused)
                     }
                     
                     DatePicker("Bought date", selection: $boughtDate, displayedComponents: .date)
@@ -44,7 +44,7 @@ struct AddItemView: View {
                 
                 Section {
                     Button("Save") {
-                        data.addItem(name: name, boughtPrice: boughtPrice ?? 0, boughtDate: boughtDate)
+                        data.addItem(name: name, purchasePrice: boughtPrice ?? 0, purchaseDate: boughtDate)
                         dismiss()
                     }
                     .disabled(name.isEmpty || boughtPrice == nil)
