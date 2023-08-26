@@ -23,6 +23,7 @@ struct ItemsView: View {
     @State private var isShowingAddScreen = false
     @State private var isShowingSortOptions = false
     @State private var isShowingResellItemScreen = false
+    @State private var isShowingUndoAlert = false
     
     @State private var searchText = ""
     @State private var reSoldItem: Item = Item()
@@ -67,9 +68,10 @@ struct ItemsView: View {
                         .swipeActions {
                             if item.isResold {
                                 Button {
-                                    data.undoResell(item)
+                                    reSoldItem = item
+                                    isShowingUndoAlert = true
                                 } label: {
-                                    Label("Mark Resold", systemImage: "arrow.uturn.backward.circle")
+                                    Label("Mark Available", systemImage: "arrow.uturn.backward.circle")
                                 }
                                 .tint(.blue)
                             } else {
@@ -77,7 +79,7 @@ struct ItemsView: View {
                                     reSoldItem = item
                                     isShowingResellItemScreen = true
                                 } label: {
-                                    Label("Mark Available", systemImage: "dollarsign.arrow.circlepath")
+                                    Label("Mark Resold", systemImage: "dollarsign.arrow.circlepath")
                                 }
                                 .tint(.green)
                             }
@@ -121,6 +123,14 @@ struct ItemsView: View {
             }
             .sheet(isPresented: $isShowingResellItemScreen) {
                 ResellItemView(item: reSoldItem)
+            }
+            .alert("Are you sure?", isPresented: $isShowingUndoAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button("Mark available") {
+                    data.undoResell(reSoldItem)
+                }
+            } message: {
+                Text("This action will undo the resale. Purchase information will be kept.")
             }
             .confirmationDialog("Sort by…", isPresented: $isShowingSortOptions) {
                 Button("Default (Date added)") { sortOrder = .default }

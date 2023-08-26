@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct DetailsView: View {
+    @EnvironmentObject var data: Items
     var item: Item
+    @State private var isShowingResellItemScreen = false
+    @State private var isShowingUndoAlert = false
+    
     var body: some View {
         ScrollView {
             // TODO: add photo to details view
             // photo goes here
+            
             VStack {
                 Text("Item name")
                 Text(item.name)
@@ -46,13 +51,13 @@ struct DetailsView: View {
                     Text("Date: \(item.resellDate.formatted(date: .abbreviated, time: .omitted))")
                     
                     if item.resellGain > 0 {
-                        Text("Resell gain: \(item.resellPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
+                        Text("Resell gain: \(item.resellGain, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
                             .foregroundColor(.green)
                     } else if item.resellGain == 0 {
                         Text("Resold for the same price bought")
                             .foregroundColor(.yellow)
                     } else {
-                        Text("Resell loss: \(item.resellPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
+                        Text("Resell loss: \(item.resellGain, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
                             .foregroundColor(.red)
                     }
                 }
@@ -62,13 +67,44 @@ struct DetailsView: View {
             VStack(alignment: .leading) {
                 Label("Item description", systemImage: "lightbulb.circle.fill")
                     .foregroundStyle(.secondary)
-                Text(item.description)
+                Text(item.description.isEmpty ? "-" : item.description)
             }
                 .detailStyle()
+            
+            if item.isResold {
+                Button {
+                    isShowingUndoAlert = true
+                    
+                } label: {
+                    Label("Mark Available", systemImage: "arrow.uturn.backward.circle")
+                        .detailStyle()
+                        .foregroundColor(.blue)
+                }
+            } else {
+                Button {
+                    isShowingResellItemScreen = true
+                } label: {
+                    Label("Resell this \(item.name)", systemImage: "dollarsign.arrow.circlepath")
+                        .detailStyle()
+                        .foregroundColor(.green)
+                }
+            }
             
             Spacer()
         }
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $isShowingResellItemScreen) {
+            ResellItemView(item: item)
+        }
+        .alert("Are you sure?", isPresented: $isShowingUndoAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Mark available") {
+                data.undoResell(item)
+            }
+        } message: {
+            Text("This action will undo the resale. Purchase information will be kept.")
+        }
+
     }
 }
 

@@ -13,8 +13,8 @@ struct ResellItemView: View {
     
     @State var item: Item
     
-    @State private var reSoldPrice: Double?
-    @State private var reSoldDate: Date = Date.now
+    @State private var reSellPrice: Double?
+    @State private var resellDate: Date = Date.now
     
     @FocusState private var inputIsFocused: Bool
     
@@ -23,19 +23,19 @@ struct ResellItemView: View {
             Form {
                 Section {
                     
-                    TextField("Resold price *", value: $reSoldPrice, format: .currency(code: "AUD"))
+                    TextField("Resold price *", value: $reSellPrice, format: .currency(code: "AUD"))
                         .keyboardType(.decimalPad)
                         .focused($inputIsFocused)
                     
-                    DatePicker("Resold date", selection: $item.resellDate, displayedComponents: .date)
+                    DatePicker("Resold date", selection: $resellDate, displayedComponents: .date)
                 }
                 
                 Section {
                     Button("Save") {
-                        data.resell(item, for: reSoldPrice ?? 0, on: reSoldDate)
+                        data.resell(item, for: reSellPrice ?? 0, on: resellDate)
                         dismiss()
                     }
-                    .disabled(reSoldPrice == nil)
+                    .disabled(reSellPrice == nil)
                     Button("Cancel") {
                         dismiss()
                     }

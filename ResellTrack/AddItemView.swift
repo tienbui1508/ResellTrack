@@ -10,55 +10,55 @@ import SwiftUI
 struct AddItemView: View {
     @EnvironmentObject var data: Items
     @Environment(\.dismiss) var dismiss
-    
+
     @State private var name = ""
     @State private var description = ""
     @State private var boughtDate = Date.now
     @State private var boughtPrice: Double?
-    
+
     @FocusState private var inputIsFocused: Bool
-    
+
     var body: some View {
         NavigationView {
             Form {
                 Section {
                     TextField("Item name *", text: $name)
-//                        .focused($inputIsFocused)
-                    
+                        .focused($inputIsFocused)
+
                     TextField("Bought price *", value: $boughtPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                         .keyboardType(.decimalPad)
                         .focused($inputIsFocused)
-                    
+
                     ZStack(alignment: .leading) {
                         if description.isEmpty {
                             Text("Description")
                                 .opacity(0.25)
                         }
-                        
+
                         TextEditor(text: $description)
-//                            .focused($inputIsFocused)
+                            .focused($inputIsFocused)
                     }
-                    
+
                     DatePicker("Bought date", selection: $boughtDate, displayedComponents: .date)
                 }
-                
+
                 Section {
                     Button("Save") {
-                        data.addItem(name: name, purchasePrice: boughtPrice ?? 0, purchaseDate: boughtDate)
+                        data.addItem(name: name, purchasePrice: boughtPrice ?? 0, purchaseDate: boughtDate, description: description)
                         dismiss()
                     }
-                    .disabled(name.isEmpty || boughtPrice == nil)
-                    
+                        .disabled(name.isEmpty || boughtPrice == nil)
+
                     Button("Cancel") {
                         dismiss()
                     }
-                    .foregroundColor(.red)
+                        .foregroundColor(.red)
                 }
-                
+
             }
-            .navigationTitle("Add Item")
-            
-            .toolbar {
+                .navigationTitle("Add Item")
+
+                .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
                     Button("Done") {

@@ -14,7 +14,7 @@ class Item: Identifiable, Codable {
     var resellPrice = 0.0
     var purchaseDate = Date.now
     var resellDate = Date.now
-    var description = "Description..."
+    var description = ""
     var resellGain: Double {
         resellPrice - purchasePrice
     }
@@ -39,43 +39,40 @@ class Item: Identifiable, Codable {
     }
     
     private func save() {
+        objectWillChange.send()
         do {
             let data = try JSONEncoder().encode(items)
             try data.write(to: savePath, options: [.atomic, .completeFileProtection])
+            print("Data saved")
         } catch {
             print("Unable to save data.")
         }
     }
     
-    func addItem(name: String, purchasePrice: Double, purchaseDate: Date) {
+    func addItem(name: String, purchasePrice: Double, purchaseDate: Date, description: String) {
+        objectWillChange.send()
         let newItem = Item()
         newItem.id = UUID()
         newItem.name = name
         newItem.purchasePrice = purchasePrice
         newItem.purchaseDate = purchaseDate
+        newItem.description = description
         items.append(newItem)
         save()
     }
     
     func delete(_ item: Item) {
+        objectWillChange.send()
         items.removeAll { $0.id == item.id }
         save()
     }
     
     func resell(_ item: Item, for resellPrice: Double, on resellDate: Date) {
         objectWillChange.send()
-        
-        item.isResold = true
         item.resellPrice = resellPrice
         item.resellDate = resellDate
+        item.isResold = true
         save()
-//        if let item = items.first(where: { $0.id == item.id }) {
-//            item.isResold = true
-//            item.resellPrice = resellPrice
-//            item.resellDate = resellDate
-//            save()
-//        }
-       
     }
     
     func undoResell(_ item: Item) {
@@ -84,5 +81,4 @@ class Item: Identifiable, Codable {
         item.resellPrice = 0
         save()
     }
-    
 }
