@@ -40,20 +40,28 @@ struct ItemsView: View {
                             VStack(alignment: .leading) {
                                 Text(item.name)
                                     .font(.headline)
-                                Text("$\(String(format: "%.0f", item.purchasePrice))")
+                                
+                                HStack {
+                                    Text("Purchase: $\(String(format: "%.0f", item.purchasePrice)) on \(item.purchaseDate.formatted(date: .numeric, time: .omitted))")
+                                }
+                                .font(.caption)
+                                
+                                if item.isResold == true {
+                                    HStack {
+                                        Text("Resell: $\(String(format: "%.0f", item.resellPrice)) on \(item.resellDate.formatted(date: .numeric, time: .omitted))")
+                                    }
                                     .font(.caption)
+                                }
                             }
                             
-                            if item.isResold && filter == .none {
+                            if item.isResold {
                                 Spacer()
-                                Image(systemName: "dollarsign.arrow.circlepath")
-                                    .foregroundColor(item.resellGain >= 0 ? .green : .red)
-                            }
-                            
-                            if item.isResold && filter == .resold {
-                                Spacer()
-                                Text("$\(String(format: "%.0f", item.resellGain))")
-                                    .foregroundColor(item.resellGain >= 0 ? .green : .red)
+                                VStack {
+                                    Image(systemName: "dollarsign.arrow.circlepath")
+                                    Text("$\(String(format: "%.0f", item.resellGain))")
+                                    
+                                }
+                                .foregroundColor(item.resellGain > 0 ? .green : (item.resellGain < 0 ? .red : .yellow))
                             }
                         }
                         .swipeActions {
@@ -92,11 +100,6 @@ struct ItemsView: View {
                         isShowingSortOptions = true
                     } label: {
                         Label("Sort", systemImage: "arrow.up.arrow.down")
-                        if sortOrder == .name {
-                            Label("sort by name", systemImage: "abc")
-                        } else if sortOrder == .date {
-                            Label("sort by name", systemImage: "calendar")
-                        }
                         
                     }
                     .buttonStyle(.borderedProminent)
@@ -107,10 +110,7 @@ struct ItemsView: View {
                     Button {
                         isShowingAddScreen = true
                     } label: {
-                        HStack {
-                            Image(systemName: "plus")
-                            Text("New item")
-                        }
+                        Image(systemName: "plus")
                     }
                     .buttonStyle(.borderedProminent)
                     .buttonBorderShape(.capsule)
