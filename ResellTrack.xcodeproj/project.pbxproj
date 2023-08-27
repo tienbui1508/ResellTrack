@@ -31,6 +31,7 @@
 		7C66EA852A5C3CEB00B9869B /* FileManager-DocumentDirectory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentDirectory.swift"; sourceTree = "<group>"; };
 		7C66EA872A5C3E0C00B9869B /* ItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsView.swift; sourceTree = "<group>"; };
 		7C66EA892A5C4A2300B9869B /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		7CA8CDE52A9B7A2B00DC761C /* Privacy Policy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Privacy Policy.md"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +74,7 @@
 				7C66EA852A5C3CEB00B9869B /* FileManager-DocumentDirectory.swift */,
 				7C6074F42A3A0F69005A7AD9 /* Assets.xcassets */,
 				7C6074F62A3A0F69005A7AD9 /* Preview Content */,
+				7CA8CDE52A9B7A2B00DC761C /* Privacy Policy.md */,
 			);
 			path = ResellTrack;
 			sourceTree = "<group>";
