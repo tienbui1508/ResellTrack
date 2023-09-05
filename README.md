@@ -14,10 +14,9 @@ https://apps.apple.com/au/app/resell-track/id6455427979
 
 # Screenshots
 
-![App Screenshots](</Screenshots/AppMockUp Screenshots/resellTrack_iphone1.png>)
-![App Screenshots](</Screenshots/AppMockUp Screenshots/resellTrack_iphone2.png>)
-![App Screenshots](</Screenshots/AppMockUp Screenshots/resellTrack_ipad.png>)
-
+![iPhone 11 pro max Screenshots](https://github.com/tienbui1508/tienbui1508.github.io/blob/main/assets/images/resellTrack/resellTrack_iphone1.png)
+![iPhone 8 plus Screenshots](https://github.com/tienbui1508/tienbui1508.github.io/blob/main/assets/images/resellTrack/resellTrack_iphone2.png)
+![iPad Screenshots](https://github.com/tienbui1508/tienbui1508.github.io/blob/main/assets/images/resellTrack/resellTrack_ipad.png)
 
 
 # App Clip
