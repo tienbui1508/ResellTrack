@@ -16,5 +16,5 @@
 
 # Updates
 
-Our privacy policy may undergo periodic updates. Please check this page for the latest information.
+- Our privacy policy may undergo periodic updates. Please check this page for the latest information.
 For any queries or suggestions regarding our Privacy Policy, please feel free to contact us at tiengia94@gmail.com.
