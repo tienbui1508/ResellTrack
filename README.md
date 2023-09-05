@@ -23,7 +23,7 @@ Source code
 
 ![App Screenshots](/assets/images/resellTrack/resellTrack_iphone1.png "iPhone 11 Pro Max")
 ![App Screenshots](/assets/images/resellTrack/resellTrack_iphone2.png "iPhone 8 Plus")
-![App Screenshots](Screenshots/AppMockUp_Screenshots/resellTrack_ipad.png)
+![App Screenshots](Screenshots/AppMockUp Screenshots/resellTrack_ipad.png)
 
 <!-- {% capture carousel_images %}
 /assets/images/resellTrack/resellTrack_screenshot1.png
