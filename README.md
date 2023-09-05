@@ -1,47 +1,32 @@
 # ResellTrack
-Resell Track: Your Ultimate Selling Companion! Organise purchased items, track their value, and record sales. Start tracking and optimising your reselling journey today!
+Your Ultimate Selling Companion! Organise purchased items, track their value, and record sales. Start tracking and optimising your reselling journey today!
 
-# Resell Track
+# Description
 
----
+Resell Track: Streamline Your Reselling Journey
+
+Introducing Resell Track – the essential tool to simplify your reselling experience. Effortlessly manage your inventory by adding new items with purchase details and descriptions. Seamlessly mark items as sold, recording selling prices and dates. With the ability to undo a resale and smart sorting options, Resell Track ensures you're always in control. Easily view all your items, sort by availability, and search for specifics. Elevate your reselling game with Resell Track's fundamental functions designed to empower your business.
 
 # Download 👇
 
-{% include elements/button.html link="https://apps.apple.com/au/app/resell-track/id6455427979" text="Click here to download **Resell Track** on *Apple App Store*" block=true %}
+https://apps.apple.com/au/app/resell-track/id6455427979
 
-{% capture list_items %}
-Screenshots
-App Clip
-Overview
-Technical details
-Description
-Source code
-{% endcapture %}
-{% include elements/list.html title="Table of Contents" type="toc" %}
 
 # Screenshots
 
-![App Screenshots](/assets/images/resellTrack/resellTrack_iphone1.png "iPhone 11 Pro Max")
-![App Screenshots](/assets/images/resellTrack/resellTrack_iphone2.png "iPhone 8 Plus")
+![App Screenshots](</Screenshots/AppMockUp Screenshots/resellTrack_iphone1.png>)
+![App Screenshots](</Screenshots/AppMockUp Screenshots/resellTrack_iphone2.png>)
 ![App Screenshots](</Screenshots/AppMockUp Screenshots/resellTrack_ipad.png>)
 
-<!-- {% capture carousel_images %}
-/assets/images/resellTrack/resellTrack_screenshot1.png
-/assets/images/resellTrack/resellTrack_screenshot2.png
-/assets/images/resellTrack/resellTrack_screenshot3.png
-/assets/images/resellTrack/resellTrack_screenshot4.png
-/assets/images/resellTrack/resellTrack_screenshot5.png
-/assets/images/resellTrack/resellTrack_screenshot6.png
-/assets/images/resellTrack/resellTrack_screenshot7.png
-/assets/images/resellTrack/resellTrack_screenshot8.png
-/assets/images/resellTrack/resellTrack_screenshot9.png
-/assets/images/resellTrack/resellTrack_screenshot10.png
-{% endcapture %}
-{% include elements/carousel.html %} -->
+
 
 # App Clip
 
-{% include elements/video.html id="NQLiCz1Kbd8" %}
+
+
+https://github.com/tienbui1508/ResellTrack/assets/80309085/340fda4b-3ec5-47a7-ba19-56c6bfd64e5e
+
+
 
 # Overview
 
@@ -96,12 +81,5 @@ An iOS app written by SwiftUI that works on iPhones, iPads and Macs. It helps us
 - Conducted testing using TestFlight and managed deployment on the App Store through App Store Connect.
 - Utilised GitHub for version control and codebase management.
 
-# Description
 
-Resell Track: Streamline Your Reselling Journey
 
-Introducing Resell Track – the essential tool to simplify your reselling experience. Effortlessly manage your inventory by adding new items with purchase details and descriptions. Seamlessly mark items as sold, recording selling prices and dates. With the ability to undo a resale and smart sorting options, Resell Track ensures you're always in control. Easily view all your items, sort by availability, and search for specifics. Elevate your reselling game with Resell Track's fundamental functions designed to empower your business.
-
-# Source code
-
-The source code for this project can be found [here - on my Github page](https://github.com/tienbui1508/ResellTrack)
