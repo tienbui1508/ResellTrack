@@ -1,5 +1,6 @@
 # ResellTrack
 Your Ultimate Selling Companion! Organise purchased items, track their value, and record sales. Start tracking and optimising your reselling journey today!
+A big upgrade on UI is coming soon! Better support for iPads and Macs!!!
 
 # Description
 
